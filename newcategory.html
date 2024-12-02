@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>newcategory</title>
+    <link href="newcategory.css" rel="stylesheet">
+</head>
+<body>
+    <div class="slider">
+        <div class="title">
+            원하는<br>
+            식물을<br>
+            찾아보세요
+        </div>
+        <div class="images">
+            <div class="item" style="--i: 1;" onclick="moveElements()">
+                    <img src="fruit.png">
+            </div>
+            <div class="item" style="--i: 2;">
+                    <img src="palmtree.png">
+            </div>
+            <div class="item" style="--i: 3;">
+                    <img src="tree.png">
+            </div>
+            <div class="item" style="--i: 4;">
+                    <img src="flower.png">
+            </div>
+            <div class="item" style="--i: 5;">
+                    <img src="cactus.png">
+            </div>
+        </div>
+        <div class="content">
+            <div class="item active">
+                <h1>CACTUS</h1>
+                <div class="des">
+                    석죽목 선인장과의 식물들을 일컫는 말. 아메리카 원산이며 지구에서 가장 척박한 환경인 사막에서 살아가는 식물이다. 선인장은 신선의 손바닥처럼 생겼다는 의미를 갖고 있으며, 제주도를 비롯하여 한국에
+                    자생하는 선인장(Opuntia속, 일명 부채선인장)의 모습이 마치 손바닥처럼 생겼다 하여
+                    붙여진 이름이다.
+                </div>
+                <button id="cactus">See more</button>
+            </div>
+            <div class="item">
+                <h1>FLOWER</h1>
+                <div class="des">
+                    꽃은 식물에서 씨를 만들기 위해 번식 기능을 수행하는 생식 기관을 말한다. 꽃이 화석상으로 처음 등장한 시기는 쥐라기 초기인 1억 7천만년 전으로 확인되며 이 화석은 중국 난징 동쪽 쥐라기 지층에서 나왔다.
+                </div>
+                <button id="flower">See more</button>
+            </div>
+            <div class="item">
+                <h1>TREE</h1>
+                <div class="des">
+                    나무는 나무질로 된 줄기 또는 가지를 가진 여러해살이 식물을 통틀어 이르는 말이다. 현재 확인된 가장 오래된 나무 화석은 3억 8천만 년 전의 것으로, 현재 확인된 가장 오래된 나무 화석은 3억 8천만 년 전의 것으로, 미국 뉴욕주에서 발견되었다.
+                </div>
+                <button id="tree">See more</button>
+            </div>
+            <div class="item">
+                <h1>PALM TREE</h1>
+                <div class="des">
+                    종려과 혹은 야자과에서 속한 식물을 일컫는 말이다. 외떡잎식물이고 큰키나무 또는 떨기나무에 속한다. 나무 기둥이 굵어지는 2차 생장을 하지 않으므로, 좁은 의미의 나무에는 포함되지 않는다.
+                </div>
+                <button id="yaza">See more</button>
+            </div>
+            <div class="item">
+                <h1>FRUIT</h1>
+                <div class="des">
+                    과일 혹은 과실은 사람과 동물이 식용하는 나무 열매의 총칭이다. 
+                </div>
+                <button id="seed">See more</button>
+            </div>
+        </div>
+        <button id="prev"></button>
+        <button id="next"></button>
+    </div>
+    <div class="category">
+        <div class="container6">
+            <div class="caccard1" onclick="location.href='gh.html';">
+                <div class="cac1"></div>
+                <div class="cac1-back">
+                    <p>
+                        금호
+                    </p>
+                </div>
+            </div>
+            <div class="caccard2" onclick="location.href='gchok.html';">
+                <div class="cac2"></div>
+                <div class="cac2-back">
+                    <p>
+                        거취옥
+                    </p>
+                </div>
+            </div>
+            <div class="caccard3" onclick="location.href='dbr.html';">
+                <div class="cac3"></div>
+                <div class="cac3-back">
+                    <p>
+                        대봉룡
+                    </p>
+                </div>
+            </div>
+            <div class="caccard4" onclick="location.href='ccgr.html';">
+                <div class="cac4"></div>
+                <div class="cac4-back">
+                    <P>
+                        꽃기린
+                    </P>
+                </div>
+            </div>
+            <div class="caccard5" onclick="location.href='hw.html';">
+                <div class="cac5"></div>
+                <div class="cac5-back">
+                    <P>
+                        화월
+                    </P>
+                </div>
+        </div>
+        </div>
+    <div class="category">
+        <div class="container7">
+            <div class="flocard1" onclick="location.href='gljh.html';">
+                <div class="flo1"></div>
+                <div class="flo1-back">
+                    <P>
+                        극락조화
+                    </P>
+                </div>
+            </div>
+            <div class="flocard2" onclick="location.href='asru.html';">
+                <div class="flo2"></div>
+                <div class="flo2-back">
+                    <P>
+                        안수리움
+                    </P>
+                </div>
+            </div>
+            <div class="flocard3" onclick="location.href='agtp.html';">
+                <div class="flo3"></div>
+                <div class="flo3-back">
+                    <P>
+                        엔젤트럼펫
+                    </P>
+                </div>
+            </div>
+            <div class="flocard4" onclick="location.href='flo4.html';">
+                <div class="flo4"></div>
+                <div class="flo4-back">
+                    <P>
+                        연꽃
+                    </P>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="category">
+        <div class="container8">
+            <div class="trcard1" onclick="location.href='mstr.html';">
+                <div class="tr1"></div>
+                <div class="tr1-back">
+                    <P>
+                        소세지트리
+                    </P>
+                </div>
+            </div>
+            <div class="trcard2" onclick="location.href='pnx.html';">
+                <div class="tr2"></div>
+                <div class="tr2-back">
+                    <P>
+                        커피나무
+                    </P>
+                </div>
+            </div>
+            <div class="trcard3" onclick="location.href='cac4.html';">
+                <div class="tr3"></div>
+                <div class="tr3-back">
+                    <P>
+                        호로죽
+                    </P>
+                </div>
+            </div>
+            <div class="trcard4" onclick="location.href='cac5.html';">
+                <div class="tr4"></div>
+                <div class="tr4-back">
+                    <P>
+                        푸르메리아
+                    </P>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="category">
+        <div class="container9">
+            <div class="yacard1" onclick="location.href='dgrn.html';">
+                <div class="ya1"></div>
+                <div class="ya1-back">
+                    <P>
+                        덕구리난
+                    </P>
+                </div>
+            </div>
+            <div class="yacard2" onclick="location.href='kcha.html';">
+                <div class="ya2"></div>
+                <div class="ya2-back">
+                    <P>
+                        켄차야자
+                    </P>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="category">
+        <div class="container10">
+            <div class="secard1" onclick="location.href='banana.html';">
+                <div class="se1"></div>
+                <div class="se1-back">
+                    <P>
+                        바나나
+                    </P>
+                </div>
+            </div>
+            <div class="secard2" onclick="location.href='sau.html';">
+                <div class="se2"></div>
+                <div class="se2-back">
+                    <P>
+                        소세지트리
+                    </P>
+                </div>
+            </div>
+            <div class="secard3" onclick="location.href='mango.html';">
+                <div class="se3"></div>
+                <div class="se3-back">
+                    <P>
+                        망고
+                    </P>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="newcategory.js"></script>
+</body>
+</html>

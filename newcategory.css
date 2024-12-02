@@ -1,0 +1,624 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap');
+    body{
+        margin: 0; 
+    }
+    .slider{
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background-color: #f0f0f0;
+        overflow: hidden;
+    }
+    .title{
+        position: absolute;
+        top: 7%;
+        right: 50%;
+        text-align: left;
+        color: #000000;
+        font-size: xxx-large;
+        font-weight: 500;
+        width: 40%;
+        line-height: 1.5;
+    }
+    .images{
+        position: absolute;
+        bottom: 0%;
+        left: 50%;
+        --rotate: 0deg;
+        transform: translate(-50%, 50%) rotate(var(--rotate));
+        width: 1300px;
+        height: 1300px;
+        border-radius: 50%;
+        transition: transform 0.5s ease-in-out;
+        outline-offset: -100px;
+    }
+    .images .item{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        rotate: calc(72deg * var(--i));
+    }
+    .images .item img{
+        height: 420px;
+        border-radius: 50%;
+    }
+    
+    .content{
+        color: #3c3c3c;
+        position: absolute;
+        top: 10%;
+        left: 65%;
+        text-align: justify;
+        width: 350px;
+    }
+    .content h1{
+        color: rgb(0, 0, 0);
+        font-size: xxx-large;
+    }
+    .content button{
+        margin-top: 30px;
+        padding: 10px 30px;
+        border-radius: 20px;
+        background-color: green;
+        color: #fff;
+        border: none;
+        float: right;
+    }
+    .content .item{
+        display: none;
+    }
+    .content .item.active{
+        display: block;
+    }
+    @keyframes showContent{
+        from{
+            opacity: 0;
+            transform: translateY(100px);
+        }to{
+            opacity: 1;
+        }
+    }
+    .content .item.active h1{
+        opacity: 0;
+        animation: showContent 0.5s ease-in-out 1 forwards;
+    }
+    .content .item.active .des{
+        opacity: 0;
+        animation: showContent 0.5s 0.3s ease-in-out 1 forwards;
+    }
+    .content .item.active button{
+        opacity: 0;
+        animation: showContent 0.5s 0.6s ease-in-out 1 forwards;
+    }
+
+    .item {
+        transition: transform 1s ease;  /* 부드러운 이동 */
+    }
+
+    .category {
+        position: relative; /* 자식 요소들에 대해 위치 설정 가능하게 */
+        width: 100%; /* 화면의 너비 */
+        height: 0vh; /* 화면의 높이 */
+        z-index: 10;
+    }
+
+    #prev, #next {
+        visibility: hidden;  /* 버튼을 보이지 않게 하되, 공간은 차지하게 만듭니다. */
+    }
+
+    .container6, 
+    .container7, 
+    .container8, 
+    .container9, 
+    .container10 {
+        display: none;
+        gap: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;    /* 불투명도 0으로 숨김 */
+        transition: opacity 1s ease; /* opacity가 변할 때 부드럽게 1초 동안 변화 */
+        }
+
+        .container6.visible,
+        .container7.visible,
+        .container8.visible,
+        .container9.visible,
+        .container10.visible {
+            display: flex; /* 원하는 표시 방식에 맞게 설정 */
+            opacity: 1;    /* 불투명도 1로 설정하여 보이게 함 */
+        }
+
+        .caccard1,
+        .caccard2,
+        .caccard3,
+        .caccard4,
+        .caccard5 {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            perspective: 1000px; /* 3D 회전 효과 */
+            transform-style: preserve-3d; /* 필수적으로 3D 설정 */
+            cursor: pointer;
+        }
+
+        .flocard1,
+        .flocard2,
+        .flocard3,
+        .flocard4 {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            perspective: 1000px; /* 3D 회전 효과 */
+            transform-style: preserve-3d; /* 필수적으로 3D 설정 */
+            cursor: pointer;
+        }
+
+        .trcard1,
+        .trcard2,
+        .trcard3,
+        .trcard4 {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            perspective: 1000px; /* 3D 회전 효과 */
+            transform-style: preserve-3d; /* 필수적으로 3D 설정 */
+            cursor: pointer;
+        }
+
+        .yacard1,
+        .yacard2 {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            perspective: 1000px; /* 3D 회전 효과 */
+            transform-style: preserve-3d; /* 필수적으로 3D 설정 */
+            cursor: pointer;
+        }
+        
+        .secard1,
+        .secard2,
+        .secard3 {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            perspective: 1000px; /* 3D 회전 효과 */
+            transform-style: preserve-3d; /* 필수적으로 3D 설정 */
+            cursor: pointer;
+        }
+
+        .cac1,
+        .cac1-back,
+        .cac2,
+        .cac2-back,
+        .cac3,
+        .cac3-back,
+        .cac4,
+        .cac4-back,
+        .cac5,
+        .cac5-back {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.6s ease; /* 부드러운 전환 효과 */
+        }
+
+        .cac1{
+            background-image: url(gh.png);
+            background-size: cover;
+            position: absolute;
+
+        }
+
+        .cac2{
+            background-image: url(gchok.png);
+            background-size: cover;
+            position: absolute;
+
+        }
+
+        .cac3{
+            background-image: url(dbr.png);
+            background-size: cover;
+            position: absolute;
+
+        }
+
+        .cac4{
+            background-image: url(ccgr.png);
+            background-size: cover;
+            position: absolute;
+
+        }
+
+        .cac5{
+            background-image: url(hw.png);
+            background-size: cover;
+            position: absolute;
+
+        }
+
+        .flo1{
+            background-image: url(gljh.png);
+            background-size: cover;
+            position: absolute;
+
+        }
+
+        .flo2{
+            background-image: url(asru.png);
+            background-size: cover;
+            position: absolute;
+
+        }
+
+        .flo3{
+            background-image: url(agtp.png);
+            background-size: cover;
+            position: absolute;
+
+        }
+
+        .flo4{
+            background-image: url(flower.png);
+            background-size: cover;
+            position: absolute;
+
+        }
+
+        .tr1{
+            background-image: url(sau.png);
+            background-size: cover;
+            position: absolute;
+
+        }
+
+        .tr2{
+            background-image: url(cof.png);
+            background-size: cover;
+            position: absolute;
+
+        }
+
+        .tr3{
+            background-image: url(hrj.png);
+            background-size: cover;
+            position: absolute;
+
+        }
+
+        .tr4{
+            background-image: url(pru.png);
+            background-size: cover;
+            position: absolute;
+
+        }
+
+        .ya1{
+            background-image: url(dgrn.png);
+            background-size: cover;
+            position: absolute;
+
+        }
+
+        .ya2{
+            background-image: url(kcha.png);
+            background-size: cover;
+            position: absolute;
+
+        }
+
+        .se1{
+            background-image: url(banana.png);
+            background-size: cover;
+            position: absolute;
+
+        }
+
+        .se2{
+            background-image: url(sau.png);
+            background-size: cover;
+            position: absolute;
+
+        }
+
+        .se3{
+            background-image: url(mango.png);
+            background-size: cover;
+            position: absolute;
+
+        }
+
+        .flo1,
+        .flo1-back,
+        .flo2,
+        .flo2-back,
+        .flo3,
+        .flo3-back,
+        .flo4,
+        .flo4-back {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.6s ease; /* 부드러운 전환 효과 */
+        }
+
+        .tr1,
+        .tr1-back,
+        .tr2,
+        .tr2-back,
+        .tr3,
+        .tr3-back,
+        .tr4,
+        .tr4-back {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.6s ease; /* 부드러운 전환 효과 */
+        }
+
+        .ya1,
+        .ya1-back,
+        .ya2,
+        .ya2-back {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.6s ease; /* 부드러운 전환 효과 */
+        }
+        
+        .se1,
+        .se1-back,
+        .se2,
+        .se2-back,
+        .se3,
+        .se3-back {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.6s ease; /* 부드러운 전환 효과 */
+        }
+
+        .cac1,
+        .cac2,
+        .cac3,
+        .cac4,
+        .cac5 {
+            background-color: #B1B1B1;
+            transform: rotateY(0deg); /* 초기 위치 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+        }
+
+        .flo1,
+        .flo2,
+        .flo3,
+        .flo4 {
+            background-color: #B1B1B1;
+            transform: rotateY(0deg); /* 초기 위치 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+        }
+
+        .tr1,
+        .tr2,
+        .tr3,
+        .tr4 {
+            background-color: #B1B1B1;
+            transform: rotateY(0deg); /* 초기 위치 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+        }
+
+        .ya1,
+        .ya2 {
+            background-color: #B1B1B1;
+            transform: rotateY(0deg); /* 초기 위치 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+        }
+
+        .se1,
+        .se2,
+        .se3 {
+            background-color: #B1B1B1;
+            transform: rotateY(0deg); /* 초기 위치 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+        }
+
+        .cac1-back,
+        .cac2-back,
+        .cac3-back,
+        .cac4-back,
+        .cac5-back {
+            background-color: #392F2F;
+            transform: rotateY(180deg); /* 뒷면을 180도 회전 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+            display: flex; /* 텍스트를 가운데 정렬하기 위해 사용 */
+            align-items: center; /* 세로 가운데 정렬 */
+            justify-content: center; /* 가로 가운데 정렬 */
+            color: white; /* 텍스트 색상 */
+            font-size: 35px; /* 텍스트 크기 */
+            text-align: center; /* 텍스트 정렬 */
+            padding: 10px; /* 텍스트 여백 */
+            box-sizing: border-box; /* 여백 포함 크기 조정 */
+        }
+
+        .flo1-back,
+        .flo2-back,
+        .flo3-back,
+        .flo4-back {
+            background-color: #392F2F;
+            transform: rotateY(180deg); /* 뒷면을 180도 회전 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+            display: flex; /* 텍스트를 가운데 정렬하기 위해 사용 */
+            align-items: center; /* 세로 가운데 정렬 */
+            justify-content: center; /* 가로 가운데 정렬 */
+            color: white; /* 텍스트 색상 */
+            font-size: 35px; /* 텍스트 크기 */
+            text-align: center; /* 텍스트 정렬 */
+            padding: 10px; /* 텍스트 여백 */
+            box-sizing: border-box; /* 여백 포함 크기 조정 */
+        }
+
+        .tr1-back,
+        .tr2-back,
+        .tr3-back,
+        .tr4-back {
+            background-color: #392F2F;
+            transform: rotateY(180deg); /* 뒷면을 180도 회전 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+            display: flex; /* 텍스트를 가운데 정렬하기 위해 사용 */
+            align-items: center; /* 세로 가운데 정렬 */
+            justify-content: center; /* 가로 가운데 정렬 */
+            color: white; /* 텍스트 색상 */
+            font-size: 35px; /* 텍스트 크기 */
+            text-align: center; /* 텍스트 정렬 */
+            padding: 10px; /* 텍스트 여백 */
+            box-sizing: border-box; /* 여백 포함 크기 조정 */
+        }
+        
+        .ya1-back,
+        .ya2-back {
+            background-color: #392F2F;
+            transform: rotateY(180deg); /* 뒷면을 180도 회전 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+            display: flex; /* 텍스트를 가운데 정렬하기 위해 사용 */
+            align-items: center; /* 세로 가운데 정렬 */
+            justify-content: center; /* 가로 가운데 정렬 */
+            color: white; /* 텍스트 색상 */
+            font-size: 35px; /* 텍스트 크기 */
+            text-align: center; /* 텍스트 정렬 */
+            padding: 10px; /* 텍스트 여백 */
+            box-sizing: border-box; /* 여백 포함 크기 조정 */
+        }
+
+        .se1-back,
+        .se2-back,
+        .se3-back {
+            background-color: #392F2F;
+            transform: rotateY(180deg); /* 뒷면을 180도 회전 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+            display: flex; /* 텍스트를 가운데 정렬하기 위해 사용 */
+            align-items: center; /* 세로 가운데 정렬 */
+            justify-content: center; /* 가로 가운데 정렬 */
+            color: white; /* 텍스트 색상 */
+            font-size: 35px; /* 텍스트 크기 */
+            text-align: center; /* 텍스트 정렬 */
+            padding: 10px; /* 텍스트 여백 */
+            box-sizing: border-box; /* 여백 포함 크기 조정 */
+        }
+
+        .caccard1:hover .cac1,
+        .caccard2:hover .cac2,
+        .caccard3:hover .cac3,
+        .caccard4:hover .cac4,
+        .caccard5:hover .cac5 {
+            transform: rotateY(180deg);
+        }
+
+        .caccard1:hover .cac1-back,
+        .caccard2:hover .cac2-back,
+        .caccard3:hover .cac3-back,
+        .caccard4:hover .cac4-back,
+        .caccard5:hover .cac5-back {
+            transform: rotateY(0deg);
+        }
+
+        .flocard1:hover .flo1,
+        .flocard2:hover .flo2,
+        .flocard3:hover .flo3,
+        .flocard4:hover .flo4 {
+            transform: rotateY(180deg);
+        }
+
+        .flocard1:hover .flo1-back,
+        .flocard2:hover .flo2-back,
+        .flocard3:hover .flo3-back,
+        .flocard4:hover .flo4-back {
+            transform: rotateY(0deg);
+        }
+
+        .trcard1:hover .tr1,
+        .trcard2:hover .tr2,
+        .trcard3:hover .tr3,
+        .trcard4:hover .tr4 {
+            transform: rotateY(180deg);
+        }
+
+        .trcard1:hover .tr1-back,
+        .trcard2:hover .tr2-back,
+        .trcard3:hover .tr3-back,
+        .trcard4:hover .tr4-back {
+            transform: rotateY(0deg);
+        }
+
+        .yacard1:hover .ya1,
+        .yacard2:hover .ya2 {
+            transform: rotateY(180deg);
+        }
+
+        .yacard1:hover .ya1-back,
+        .yacard2:hover .ya2-back {
+            transform: rotateY(0deg);
+        }
+
+        .secard1:hover .se1,
+        .secard2:hover .se2,
+        .secard3:hover .se3 {
+            transform: rotateY(180deg);
+        }
+
+        .secard1:hover .se1-back,
+        .secard2:hover .se2-back,
+        .secard3:hover .se3-back {
+            transform: rotateY(0deg);
+        }
+        
+        .cac1, .cac2, .cac3, .cac4, .cac5 {
+            width: 200px;
+            height: 200px;
+            background-color: #B1B1B1;
+            border-radius: 50%; /* 원형 설정 */
+        }
+
+        .flo1, .flo2, .flo3, .flo4 {
+            width: 200px;
+            height: 200px;
+            background-color: #717171;
+            border-radius: 50%; /* 원형 설정 */
+        }
+
+        .tr1, .tr2, .tr3, .tr4 {
+            width: 200px;
+            height:200px;
+            background-color: #494949;
+            border-radius: 50%; /* 원형 설정 */
+        }
+
+        .ya1, .ya2 {
+            width: 200px;
+            height: 200px;
+            background-color: #2e2e2e;
+            border-radius: 50%; /* 원형 설정 */
+        }
+
+        .se1, .se2, .se3 {
+            width: 200px;
+            height: 200px;
+            background-color: #161616;
+            border-radius: 50%; /* 원형 설정 */
+        }

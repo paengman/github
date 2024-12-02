@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #f0f0f0;
+            height: 150vh; /* 스크롤을 가능하게 하기 위해 높이 설정 */
+            overflow-x: auto; /* 수평 스크롤 활성화 */
+        }
+
+        .cactus, .triangle, .flower, .tree {
+            cursor: pointer;
+            transition: box-shadow 0.3s ease; /* 부드러운 그림자 효과 */
+        }
+        .cactus:hover, .triangle:hover, .flower:hover, .tree:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
+        }
+
+        .yaza1, .seed1 {
+            cursor: pointer;
+            transition: filter 0.3s ease;
+        }
+
+        .yaza1:hover, .seed1:hover {
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+        }
+        
+        .container1, .container2, .container3, .container4, .container5 {
+            position: absolute;
+            transition: transform 1s ease; /* 이동 애니메이션 추가 */
+        }
+        .container1 {
+            top: 0;
+            right: 0;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            z-index: 1; /* z-index 설정 */
+        }
+        .cactus {
+            width: 100%;
+            height: 100%;
+            background-color: #323232;
+            border-radius: 50%;
+            position: absolute;
+            top: 13px;
+            left: 0;
+        }
+        .triangle {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 25px solid #323232;
+            transform-origin: center bottom;
+        }
+        .container2 {
+            bottom: 0; /* 아래에서 위치 조정 */
+            left: 80%; /* 수평 중앙 정렬 */
+            transform: translateX(-50%); /* 중앙 정렬을 위한 변환 */
+            z-index: 2; /* z-index를 높여서 항상 위에 오도록 설정 */
+        }
+        .flower {
+            background-color: #D33A3A;
+            width: 300px; /* 크기 조정: 원하는 크기로 변경 */
+            height: 210px; /* 크기 조정: 원하는 크기로 변경 */
+            border-radius: 300px / 200px; /* 타원형 설정 */
+            transform: rotate(-60deg); /* 회전 설정: 원하는 각도로 변경 */
+            position: relative; /* 부모의 상대 위치에 따라 배치 */
+            top: 0; /* 수직 위치 조정 */
+        }
+        .container3 {
+            top: 120%; /* 세로 중앙 정렬 */
+            left: 10%; /* 왼쪽에 위치 */
+            transform: translateY(-50%) rotate(-15deg);
+            z-index: 3; /* z-index를 높여서 항상 위에 오도록 설정 */
+        }
+        .tree {
+            background-color: #656464; /* 색상 설정 */
+            width: 250px; /* 너비 설정 */
+            height: 650px; /* 높이 설정 */
+        }
+        .container4 {
+            bottom: -1000px; /* 화면 하단에서 20px 위에 배치 */
+            right: 0px; /* 화면 오른쪽에서 20px 왼쪽에 배치 */
+            z-index: 4; /* 다른 도형보다 위로 올리려면 z-index 설정 */
+        }
+        .container5 {
+            z-index: 5;
+            bottom: -1300px; /* 화면 하단에서 20px 위에 배치 */
+            left: 100px
+        }
+        
+        /* 도형 클릭 시 카테고리 나옴 */
+        .container6, 
+        .container7, 
+        .container8, 
+        .container9, 
+        .container10 {
+            display: none;
+            gap: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;    /* 불투명도 0으로 숨김 */
+            transition: opacity 1s ease; /* opacity가 변할 때 부드럽게 1초 동안 변화 */
+        }
+
+        .container6.visible,
+        .container7.visible,
+        .container8.visible,
+        .container9.visible,
+        .container10.visible {
+            display: flex; /* 원하는 표시 방식에 맞게 설정 */
+            opacity: 1;    /* 불투명도 1로 설정하여 보이게 함 */
+        }
+
+        .caccard1,
+        .caccard2,
+        .caccard3,
+        .caccard4,
+        .caccard5 {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            perspective: 1000px; /* 3D 회전 효과 */
+            transform-style: preserve-3d; /* 필수적으로 3D 설정 */
+            cursor: pointer;
+        }
+
+        .flocard1,
+        .flocard2,
+        .flocard3,
+        .flocard4 {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            perspective: 1000px; /* 3D 회전 효과 */
+            transform-style: preserve-3d; /* 필수적으로 3D 설정 */
+            cursor: pointer;
+        }
+
+        .trcard1,
+        .trcard2,
+        .trcard3,
+        .trcard4 {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            perspective: 1000px; /* 3D 회전 효과 */
+            transform-style: preserve-3d; /* 필수적으로 3D 설정 */
+            cursor: pointer;
+        }
+
+        .yacard1,
+        .yacard2 {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            perspective: 1000px; /* 3D 회전 효과 */
+            transform-style: preserve-3d; /* 필수적으로 3D 설정 */
+            cursor: pointer;
+        }
+        
+        .secard1,
+        .secard2,
+        .secard3 {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            perspective: 1000px; /* 3D 회전 효과 */
+            transform-style: preserve-3d; /* 필수적으로 3D 설정 */
+            cursor: pointer;
+        }
+
+        .cac1,
+        .cac1-back,
+        .cac2,
+        .cac2-back,
+        .cac3,
+        .cac3-back,
+        .cac4,
+        .cac4-back,
+        .cac5,
+        .cac5-back {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.6s ease; /* 부드러운 전환 효과 */
+        }
+
+        .flo1,
+        .flo1-back,
+        .flo2,
+        .flo2-back,
+        .flo3,
+        .flo3-back,
+        .flo4,
+        .flo4-back {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.6s ease; /* 부드러운 전환 효과 */
+        }
+
+        .tr1,
+        .tr1-back,
+        .tr2,
+        .tr2-back,
+        .tr3,
+        .tr3-back,
+        .tr4,
+        .tr4-back {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.6s ease; /* 부드러운 전환 효과 */
+        }
+
+        .ya1,
+        .ya1-back,
+        .ya2,
+        .ya2-back {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.6s ease; /* 부드러운 전환 효과 */
+        }
+        
+        .se1,
+        .se1-back,
+        .se2,
+        .se2-back,
+        .se3,
+        .se3-back {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.6s ease; /* 부드러운 전환 효과 */
+        }
+
+        .cac1,
+        .cac2,
+        .cac3,
+        .cac4,
+        .cac5 {
+            background-color: #B1B1B1;
+            transform: rotateY(0deg); /* 초기 위치 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+        }
+
+        .flo1,
+        .flo2,
+        .flo3,
+        .flo4 {
+            background-color: #B1B1B1;
+            transform: rotateY(0deg); /* 초기 위치 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+        }
+
+        .tr1,
+        .tr2,
+        .tr3,
+        .tr4 {
+            background-color: #B1B1B1;
+            transform: rotateY(0deg); /* 초기 위치 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+        }
+
+        .ya1,
+        .ya2 {
+            background-color: #B1B1B1;
+            transform: rotateY(0deg); /* 초기 위치 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+        }
+
+        .se1,
+        .se2,
+        .se3 {
+            background-color: #B1B1B1;
+            transform: rotateY(0deg); /* 초기 위치 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+        }
+
+        .cac1-back,
+        .cac2-back,
+        .cac3-back,
+        .cac4-back,
+        .cac5-back {
+            background-color: #392F2F;
+            transform: rotateY(180deg); /* 뒷면을 180도 회전 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+        }
+
+        .flo1-back,
+        .flo2-back,
+        .flo3-back,
+        .flo4-back {
+            background-color: #392F2F;
+            transform: rotateY(180deg); /* 뒷면을 180도 회전 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+        }
+
+        .tr1-back,
+        .tr2-back,
+        .tr3-back,
+        .tr4-back {
+            background-color: #392F2F;
+            transform: rotateY(180deg); /* 뒷면을 180도 회전 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+        }
+        
+        .ya1-back,
+        .ya2-back {
+            background-color: #392F2F;
+            transform: rotateY(180deg); /* 뒷면을 180도 회전 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+        }
+
+        .se1-back,
+        .se2-back,
+        .se3-back {
+            background-color: #392F2F;
+            transform: rotateY(180deg); /* 뒷면을 180도 회전 */
+            backface-visibility: hidden; /* 뒷면 숨김 */
+        }
+
+        .caccard1:hover .cac1,
+        .caccard2:hover .cac2,
+        .caccard3:hover .cac3,
+        .caccard4:hover .cac4,
+        .caccard5:hover .cac5 {
+            transform: rotateY(180deg);
+        }
+
+        .caccard1:hover .cac1-back,
+        .caccard2:hover .cac2-back,
+        .caccard3:hover .cac3-back,
+        .caccard4:hover .cac4-back,
+        .caccard5:hover .cac5-back {
+            transform: rotateY(0deg);
+        }
+
+        .flocard1:hover .flo1,
+        .flocard2:hover .flo2,
+        .flocard3:hover .flo3,
+        .flocard4:hover .flo4 {
+            transform: rotateY(180deg);
+        }
+
+        .flocard1:hover .flo1-back,
+        .flocard2:hover .flo2-back,
+        .flocard3:hover .flo3-back,
+        .flocard4:hover .flo4-back {
+            transform: rotateY(0deg);
+        }
+
+        .trcard1:hover .tr1,
+        .trcard2:hover .tr2,
+        .trcard3:hover .tr3,
+        .trcard4:hover .tr4 {
+            transform: rotateY(180deg);
+        }
+
+        .trcard1:hover .tr1-back,
+        .trcard2:hover .tr2-back,
+        .trcard3:hover .tr3-back,
+        .trcard4:hover .tr4-back {
+            transform: rotateY(0deg);
+        }
+
+        .yacard1:hover .ya1,
+        .yacard2:hover .ya2 {
+            transform: rotateY(180deg);
+        }
+
+        .yacard1:hover .ya1-back,
+        .yacard2:hover .ya2-back {
+            transform: rotateY(0deg);
+        }
+
+        .secard1:hover .se1,
+        .secard2:hover .se2,
+        .secard3:hover .se3 {
+            transform: rotateY(180deg);
+        }
+
+        .secard1:hover .se1-back,
+        .secard2:hover .se2-back,
+        .secard3:hover .se3-back {
+            transform: rotateY(0deg);
+        }
+        
+        .cac1, .cac2, .cac3, .cac4, .cac5 {
+            width: 200px;
+            height: 200px;
+            background-color: #B1B1B1;
+            border-radius: 50%; /* 원형 설정 */
+        }
+
+        .flo1, .flo2, .flo3, .flo4 {
+            width: 200px;
+            height: 200px;
+            background-color: #717171;
+            border-radius: 50%; /* 원형 설정 */
+        }
+
+        .tr1, .tr2, .tr3, .tr4 {
+            width: 200px;
+            height:200px;
+            background-color: #494949;
+            border-radius: 50%; /* 원형 설정 */
+        }
+
+        .ya1, .ya2 {
+            width: 200px;
+            height: 200px;
+            background-color: #2e2e2e;
+            border-radius: 50%; /* 원형 설정 */
+        }
+
+        .se1, .se2, .se3 {
+            width: 200px;
+            height: 200px;
+            background-color: #161616;
+            border-radius: 50%; /* 원형 설정 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container1">
+        <div class="cactus" onclick="moveElements()"></div>
+        <div class="triangle" style="top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(20deg) translateY(-298px);"></div>
+        <div class="triangle" style="top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(80deg) translateY(-298px);"></div>
+        <div class="triangle" style="top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(140deg) translateY(-298px);"></div>
+        <div class="triangle" style="top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(200deg) translateY(-298px);"></div>
+        <div class="triangle" style="top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(260deg) translateY(-298px);"></div>
+        <div class="triangle" style="top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(320deg) translateY(-298px);"></div>
+    </div>
+
+    <div class="container2">
+        <div class="flower"></div>
+    </div>
+
+    <div class="container3">
+        <div class="tree"></div> <!-- tree 추가 -->
+    </div>
+
+    <div class="container4">
+        <div class="yaza"><svg xmlns="http://www.w3.org/2000/svg" width="500" height="900" viewBox="0 0 717 1123" fill="none">
+            <path d="M0 745.976L176.614 1123L630.765 1026.12L857 197.797L759.442 0L513.864 42.7886L0 745.976Z" fill="#656464" class="yaza1"/>
+            </svg></div>
+    </div>
+
+    <div class="container5">
+        <div class="seed"><svg xmlns="http://www.w3.org/2000/svg" width="442" height="383" viewBox="0 0 442 383" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M138.285 4.65946C44.7915 24.3535 -15.0347 116.11 4.65938 209.604C24.3535 303.097 116.11 362.924 209.604 343.229C236.299 337.606 260.25 326.107 280.388 310.371C280.679 313.123 281.113 315.886 281.696 318.653C290.917 362.427 333.878 390.438 377.653 381.217C421.427 371.996 449.438 329.035 440.217 285.261C430.996 241.486 388.035 213.475 344.261 222.696C342.699 223.025 341.157 223.397 339.636 223.811C347.751 196.933 349.425 167.695 343.229 138.285C323.535 44.7915 231.779 -15.0347 138.285 4.65946Z" fill="#B1B1B1" class="seed1"/>
+            </svg></div>
+    </div>
+
+    <div class="container6">
+        <div class="caccard1" onclick="location.href='gh.html';">
+            <div class="cac1"></div>
+            <div class="cac1-back"></div>
+        </div>
+        <div class="caccard2" onclick="location.href='gchok.html';">
+            <div class="cac2"></div>
+            <div class="cac2-back"></div>
+        </div>
+        <div class="caccard3" onclick="location.href='dbr.html';">
+            <div class="cac3"></div>
+            <div class="cac3-back"></div>
+        </div>
+        <div class="caccard4" onclick="location.href='cac4.html';">
+            <div class="cac4"></div>
+            <div class="cac4-back"></div>
+        </div>
+        <div class="caccard5" onclick="location.href='cac5.html';">
+            <div class="cac5"></div>
+            <div class="cac5-back"></div>
+        </div>
+    </div>
+
+    <div class="container7">
+        <div class="flocard1" onclick="location.href='gljh.html';">
+            <div class="flo1"></div>
+            <div class="flo1-back"></div>
+        </div>
+        <div class="flocard2" onclick="location.href='asru.html';">
+            <div class="flo2"></div>
+            <div class="flo2-back"></div>
+        </div>
+        <div class="flocard3" onclick="location.href='agtp.html';">
+            <div class="flo3"></div>
+            <div class="flo3-back"></div>
+        </div>
+        <div class="flocard4" onclick="location.href='flo4.html';">
+            <div class="flo4"></div>
+            <div class="flo4-back"></div>
+        </div>
+    </div>
+
+    <div class="container8">
+        <div class="trcard1" onclick="location.href='mstr.html';">
+            <div class="tr1"></div>
+            <div class="tr1-back"></div>
+        </div>
+        <div class="trcard2" onclick="location.href='pnx.html';">
+            <div class="tr2"></div>
+            <div class="tr2-back"></div>
+        </div>
+        <div class="trcard3" onclick="location.href='ccgr.html';">
+            <div class="tr3"></div>
+            <div class="tr3-back"></div>
+        </div>
+        <div class="trcard4" onclick="location.href='hw.html';">
+            <div class="tr4"></div>
+            <div class="tr4-back"></div>
+        </div>
+    </div>
+
+    <div class="container9">
+        <div class="yacard1" onclick="location.href='dgrn.html';">
+            <div class="ya1"></div>
+            <div class="ya1-back"></div>
+        </div>
+        <div class="yacard2" onclick="location.href='kcha.html';">
+            <div class="ya2"></div>
+            <div class="ya2-back"></div>
+        </div>
+    </div>
+
+    <div class="container10">
+        <div class="secard1" onclick="location.href='banana.html';">
+            <div class="se1"></div>
+            <div class="se1-back"></div>
+        </div>
+        <div class="secard2" onclick="location.href='sau.html';">
+            <div class="se2"></div>
+            <div class="se2-back"></div>
+        </div>
+        <div class="secard3" onclick="location.href='mango.html';">
+            <div class="se3"></div>
+            <div class="se3-back"></div>
+        </div>
+    </div>
+
+
+
+    <script> 
+   const moveOutAll = (clickedContainer, type) => {
+            const containers = document.querySelectorAll('.container1, .container2, .container3, .container4, .container5');
+            let lastIndex = containers.length - 1;
+
+            // 클릭한 도형을 화면 밖으로 이동
+            clickedContainer.style.transform = 'translateX(-200vw)';
+
+            containers.forEach((container, index) => {
+                if (container !== clickedContainer) {
+                    setTimeout(() => {
+                        container.style.transform = 'translateX(-200vw)';
+                    }, index * 50);
+                }
+                
+                })
+
+                const allContainers = ['container6', 'container7', 'container8', 'container9', 'container10'];
+allContainers.forEach(container => {
+    const element = document.querySelector(`.${container}`);
+    element.classList.remove('visible');  // 모든 컨테이너에서 visible 클래스 제거
+    element.style.display = 'none';  // display: none으로 숨김
+});
+
+// 클릭한 도형에 따라 적절한 container에 visible 클래스 추가
+if (type === 'flower') {
+    const container = document.querySelector('.container7');
+    container.style.display = 'flex';  // 선택된 컨테이너 보이게 하기
+    setTimeout(() => container.classList.add('visible'), 10);  // display 후, opacity 애니메이션을 시작
+} else if (type === 'tree') {
+    const container = document.querySelector('.container8');
+    container.style.display = 'flex';
+    setTimeout(() => container.classList.add('visible'), 10);
+} else if (type === 'yaza') {
+    const container = document.querySelector('.container9');
+    container.style.display = 'flex';
+    setTimeout(() => container.classList.add('visible'), 10);
+} else if (type === 'seed') {
+    const container = document.querySelector('.container10');
+    container.style.display = 'flex';
+    setTimeout(() => container.classList.add('visible'), 10);
+} else if (type === 'cactus') {
+    const container = document.querySelector('.container6');
+    container.style.display = 'flex';
+    setTimeout(() => container.classList.add('visible'), 10);
+}
+
+
+
+    };
+        // 각 도형에 클릭 이벤트 추가
+        document.querySelector('.cactus').addEventListener('click', () => moveOutAll(document.querySelector('.container1'), 'cactus'));
+        document.querySelector('.flower').addEventListener('click', () => moveOutAll(document.querySelector('.container2'), 'flower'));
+        document.querySelector('.tree').addEventListener('click', () => moveOutAll(document.querySelector('.container3'), 'tree'));
+        document.querySelector('.yaza').addEventListener('click', () => moveOutAll(document.querySelector('.container4'), 'yaza'));
+        document.querySelector('.seed').addEventListener('click', () => moveOutAll(document.querySelector('.container5'), 'seed'));
+    </script>
+</body>
+</html>

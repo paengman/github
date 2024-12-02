@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>금호</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh; /* 전체 화면 높이 설정 */
+            display: flex;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .img {
+            background-image: url(gh.png);
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background-size: cover;
+        }
+
+        .ex {
+            width: 40%; /* 나머지 공간 차지 */
+            display: flex; /* 내부 콘텐츠를 Flexbox로 설정 */
+            flex-direction: column; /* 수직 정렬 */
+            justify-content: center; /* 세로 가운데 정렬 */
+            z-index: 1;
+        }
+
+        .ghtitle {
+            text-align: right;
+            margin-right: 180px;
+            font-size: 40px; /* 제목 크기 조정 */
+            font-weight: bold; /* 제목 굵게 */
+            margin-bottom: 20px; /* 제목과 아이콘 간의 간격 */
+        }
+
+        .icon {
+            display: flex; /* 수평 정렬을 위한 Flexbox */
+            justify-content: center; /* 수평 가운데 정렬 */
+            gap: 40px; /* 아이콘 간의 간격 */
+            margin-bottom: 20px; /* 아이콘과 정보 간의 간격 */
+        }
+
+        .icon-item {
+            display: flex;
+            flex-direction: column; /* 아이콘과 텍스트를 수직 정렬 */
+            align-items: center; /* 텍스트와 아이콘을 중앙 정렬 */
+        }
+
+        .icon-item div {
+            width: 40px;
+            height: 40px;
+            background-size: cover;
+        }
+
+        .water {
+            background-image: url(drop.png);
+        }
+
+        .sun {
+            background-image: url(flowericon.png);
+        }
+
+        .locate {
+            background-image: url(location.png);
+        }
+
+        .icon-item p {
+            margin-top: 8px; /* 아이콘과 텍스트 간의 간격 */
+            font-size: 14px;
+            color: #333;
+        }
+
+        .info {
+            position: absolute; /* 절대 위치 설정 */
+            top: 78%; /* 상단에서 20% 위치 */
+            left: 84%; /* 왼쪽에서 중앙으로 이동 */
+            transform: translate(-50%, -50%); /* 중앙 정렬을 위한 변환 */
+            text-align: center; /* 중앙 정렬 */
+        }
+    </style>
+</head>
+<body>
+    <div class="img"></div>
+    <div class="ex">
+        <div class="ghtitle">
+            금호
+        </div>
+        <div class="icon">
+            <div class="icon-item">
+                <div class="water"></div>
+                <p>3주</p>
+            </div>
+            <div class="icon-item">
+                <div class="sun"></div>
+                <p>여름</p>
+            </div>
+            <div class="icon-item">
+                <div class="locate"></div>
+                <p>2층 온실</p>
+            </div>
+        </div>
+        <div class="info">
+            <p>보통은 단구이나 구가커지면 자구가 생기는 경우가 있다.
+                구경80cm, 높이130cm, 생정점부위는 황백색의 면모로 덮인다.
+                체색은 밝은녹색, 능은 처음에 8개정도이나, 성장하면서 능수가 증가하여 30릉 이상으로 된다.
+                주변가시는 8~10개, 길이3cm정도, 중앙가시는 대개 4개, 길이5cm정도.
+                꽃은 밝은 황색, 길이는 약 6cm, 직경5cm. 구경 30cm정도부터 개화.
+                개화기는 봄~여름이다.</p>
+        </div>
+    </div>
+</body>
+</html>
